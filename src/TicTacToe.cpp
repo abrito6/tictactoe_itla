@@ -1,14 +1,94 @@
-#include "TicTacToe.h"
 #include <cstdlib>
 using namespace std;
 
-char board[3][3]; //Possible values are X, O and _ (for blank positions)
-char player = 'X';
+char tablero[3][3]; //Possible values are X, O and _ (for blank positions)
+char jugadoractual = 'X';
 
 bool isAvailable(int row, int column)
 {
 	//TODO: Implement this code so that it tells the user whether or not he can play in the selected cell
+	
+	//horizontal
+	 char jugadorEncontrado = tablero[0][0];
+     for(int i =0 ; i < 3; i++){
+             for(int j = 0 ; j < 3 ; j++){
+                     if(tablero[i][j] == '_'){
+                          break; break;
+                     }
+                     if(jugadorEncontrado != tablero[i][j]){
+                          break; break;
+                                        
+                     }
+                     jugadorEncontrado = tablero[i][j];
+                     if(j == 2){
+                          printf("EXELENTE HA GANADO %c", jugadorEncontrado);
+                
+
+
 	return true;
+}
+}
+}
+
+     //vertical
+     jugadorEncontrado = tablero[0][0];
+     for(int i =0 ; i < 3; i++){
+             for(int j = 0 ; j < 3 ; j++){
+                     if(tablero[j][i] == '_'){
+                          break; break;
+                     }
+                     if(jugadorEncontrado != tablero[j][i]){
+                          break; break;                                                 
+                                        
+                     }
+                     jugadorEncontrado = tablero[j][i];
+                     if(j == 2){
+                          printf("EXELENTE HA GANADO %c", jugadorEncontrado);
+                          return true;                          
+                     }
+              }             
+             
+     }
+     
+     //diagonal de izquierda a derecha
+     jugadorEncontrado = tablero[0][0];
+     for(int i = 0 ; i < 3; i++){
+           if(tablero[i][i] == '_'){
+                 break; 
+             }
+             if(jugadorEncontrado != tablero[i][i]){
+                   break;                                               
+                                        
+             }
+             jugadorEncontrado = tablero[i][i];
+             if(i == 2){
+                    printf("EXELENTE HA GANADO %c", jugadorEncontrado);
+                    return true;                          
+             }                 
+             
+     }
+
+     //diagonal de derecha a izquierda
+     jugadorEncontrado = tablero[0][2];
+     for(int i = 2 ; i >= 0; i--){
+           if(tablero[2-i][i] == '_'){
+                 break; 
+             }
+             if(jugadorEncontrado != tablero[2-i][i]){
+                   break;                                               
+                                        
+             }
+             jugadorEncontrado = tablero[2-i][i];
+             if(i == 0){
+                    printf("EXELENTE HA GANADO %c", jugadorEncontrado);
+                    return true;                          
+             }                 
+             
+     }
+
+     return false;
+     
+     
 }
 
 //Give initial values to the board matrix
@@ -18,7 +98,7 @@ void init()
 	{
 		for(int j = 0 ; j < 3 ; j++)
 		{
-			board[i][j] = '_';
+			tablero[i][j] = '_';
 		}
 	}
 }
@@ -48,11 +128,15 @@ bool gameover()
 {
 	//TODO: Implement this method,verify if any player has won the match of it's being a tie.
 	//Return true if the game is over. Print message informing the user about what just happened.
-	if(false){ // change this with a real condition
-		cout << "You loose" << endl;
-	}
-	return false;
-}
+	
+for(int i = 0 ; i < 3; i++){
+             for(int j = 0; j < 3; j++){
+                  if(tablero[i][j] == '_'){
+                      return false;                
+                  }
+             }             
+             
+     }
 
 bool isValidInput(istream& in){
 	if(in.fail())
